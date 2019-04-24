@@ -1,10 +1,8 @@
 var mongoose = require("mongoose");
-var ObjectId = require('mongodb').ObjectID;
 
 var pidgeonSchema = mongoose.Schema({
-    id: { type: ObjectId, required: true },
-    name: { type: String, required: true },
-    img: { type: String, required: true },
+    name: String,
+    img: String,
     accumulatedScore: Number,
     totalScoreVotes: Number,
     totalMaleVotes: Number,
