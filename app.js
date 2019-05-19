@@ -17,9 +17,8 @@ app.use(cors());
 app.options('*', cors());
 
 mongoose.connect(process.env.DB_CONN_DEV, { useNewUrlParser: true});
-app.get("/", function(req, res){
-    res.sendfile(__dirname + "/public/index.html");
-});
-app.use('/api/pidgeons', pidgeonsRouter);
+
 app.use('/api/auth', authRouter);
+app.use('/api/pidgeons', pidgeonsRouter);
+
 module.exports = app;

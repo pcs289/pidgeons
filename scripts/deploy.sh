@@ -13,8 +13,10 @@ ssh ubuntu@pidgeon.remote <<EOF
 EOF
 
 
-##Copy Files to server
-rsync -av -e ssh --exclude='node_modules/*,*.iml,*-lock.json,.idea/*' ../../pidgeons ubuntu@pidgeon.remote:~/pidgeons
+rsync -av -e ssh ../../pidgeons-front/dist/pidgeons-front/ ubuntu@pidgeon.remote:~/pidgeons/public
+
+##Copy Backend Files to server
+rsync -av -e ssh --exclude='node_modules/*' --exclude='*.iml' --exclude='*-lock.json' --exclude='.idea/*' ../../pidgeons ubuntu@pidgeon.remote:~/
 
 ##Remotely reinstall dependencies and restart service
 ssh ubuntu@pidgeon.remote <<EOF
