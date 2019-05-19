@@ -16,8 +16,10 @@ app.use(cookieParser());
 app.use(cors());
 app.options('*', cors());
 
-mongoose.connect(process.env.DB_CONN, { useNewUrlParser: true});
-
-app.use('/pidgeons', pidgeonsRouter);
-app.use('/auth', authRouter);
+mongoose.connect(process.env.DB_CONN_DEV, { useNewUrlParser: true});
+app.get("/", function(req, res){
+    res.sendfile(__dirname + "/public/index.html");
+});
+app.use('/api/pidgeons', pidgeonsRouter);
+app.use('/api/auth', authRouter);
 module.exports = app;

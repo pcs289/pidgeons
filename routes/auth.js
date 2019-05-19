@@ -31,7 +31,10 @@ router.post('/login', function(req, res, next){
         });
     }else if(!username && email){
         userModel.findOne({email: email}).exec(function(err, user){
-            if(!user) res.send({auth: false, reason: "Wrong email"});
+            if(!user){
+                res.send({auth: false, reason: "Wrong email"});
+                return;
+            }
             if(bcrypt.compareSync(password, user.password)){
                 var token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET, { expiresIn: 86400 });
                 res.send({auth: true, token: token});

@@ -14,6 +14,23 @@ router.get('/', function(req, res) {
     });
 });
 
+/* GET random pidgeon */
+router.get('/random', function(req, res){
+   pidgeonHandler.getRandomPidgeon().then(function (pidgeon) {
+       res.send(pidgeon);
+   }).catch(function (reason) { res.send(reason); });
+});
+
+/* GET ranking pidgeons */
+router.post('/ranking', function(req, res){
+    var size = parseInt(req.body.size);
+    var page = parseInt(req.body.page);
+    var order = req.body.order;
+   pidgeonHandler.getRanking(size, page, order).then(function(pidgeonArr){
+      res.send(pidgeonArr);
+   }).catch(function (reason) { res.send(reason) });
+});
+
 /* CREATE a pidgeon */
 router.post('/', VerifyToken, function(req, res){
     var name = req.body.name;
